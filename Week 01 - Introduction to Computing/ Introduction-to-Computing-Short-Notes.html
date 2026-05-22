@@ -1,3 +1,4 @@
+Visit - 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,19 +227,39 @@ body{font-family:'Outfit',sans-serif;background:
 /* ──────────────────────────────────────────
    SECTION 07 — BITS INTERACTIVE
    ────────────────────────────────────────── */
-.bit-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:12px 0 6px}
+.bit-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 6px;padding:10px 10px 6px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)}
 .bit{
-  font-family:'JetBrains Mono',monospace;width:36px;height:36px;
+  font-family:'JetBrains Mono',monospace;width:40px;height:40px;
   border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:600;cursor:pointer;
-  background:var(--purple-l);color:var(--purple-d);
-  transition:transform .15s,background .15s;user-select:none;
-  border:2px solid transparent;
+  font-size:16px;font-weight:600;cursor:pointer;
+  background:linear-gradient(180deg,rgba(139,123,255,.18),rgba(139,123,255,.1));
+  color:var(--purple-d);
+  transition:transform .15s,background .15s,box-shadow .15s,border-color .15s;user-select:none;
+  border:1px solid rgba(139,123,255,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 12px rgba(0,0,0,.12);
 }
-.bit:hover{transform:scale(1.12)}
-.bit.one{background:var(--purple-d);color:#fff;border-color:var(--purple)}
+.bit:hover{transform:translateY(-2px) scale(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 7px 18px rgba(0,0,0,.18);border-color:rgba(139,123,255,.35)}
+.bit.one{background:linear-gradient(180deg,rgba(139,123,255,.92),rgba(102,182,255,.7));color:#fff;border-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px rgba(139,123,255,.2)}
 .bit-eq{font-size:13px;color:var(--text2);margin:0 6px}
-.byte-result{font-size:13px;font-weight:700;color:var(--purple-d);margin-top:6px;min-height:20px;transition:all .2s}
+.byte-layout{display:flex;flex-direction:column;gap:12px;align-items:stretch;margin-top:12px}
+.byte-current,.byte-guide{min-width:0}
+.byte-current,.byte-guide{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:1rem}
+.byte-current-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.byte-current-row{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:12px 12px 10px;margin-top:4px;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.byte-char{font-size:34px;font-weight:800;line-height:1;color:var(--purple-d)}
+.byte-char-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;gap:4px;padding:8px 10px;border-radius:12px;background:rgba(139,123,255,.08);border:1px solid rgba(139,123,255,.16)}
+.byte-char-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);line-height:1}
+.byte-copy{min-width:0}
+.byte-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--purple-d)}
+.byte-desc{font-size:13px;font-weight:700;color:var(--text2);margin-top:0;min-height:20px;transition:all .2s}
+.byte-help{font-size:12px;color:var(--text3);margin-top:8px;line-height:1.55}
+.byte-guide-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.byte-guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:500px){.byte-guide-grid{grid-template-columns:1fr}}
+.byte-range{border-radius:12px;padding:.8rem .85rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.byte-range-code{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--purple-d)}
+.byte-range-name{font-size:13px;font-weight:700;margin-top:4px;color:var(--text)}
+.byte-range-ex{font-size:11.5px;color:var(--text3);margin-top:4px;line-height:1.45}
 .scale-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}
 .sz-pill{
   font-size:12px;font-weight:700;padding:6px 13px;border-radius:20px;
@@ -675,20 +696,89 @@ body{font-family:'Outfit',sans-serif;background:
 <div class="card reveal">
   <div class="card-title">Build your own byte — click the bits to toggle 0 and 1</div>
   <div class="card-sub" style="margin-top:4px">Each square is one bit. 8 bits = 1 byte = 1 character</div>
-  <div class="bit-row" id="bit-row">
-    <div class="bit" onclick="toggleBit(this)">0</div>
-    <div class="bit" onclick="toggleBit(this)">1</div>
-    <div class="bit" onclick="toggleBit(this)">0</div>
-    <div class="bit" onclick="toggleBit(this)">1</div>
-    <div class="bit" onclick="toggleBit(this)">0</div>
-    <div class="bit" onclick="toggleBit(this)">1</div>
-    <div class="bit" onclick="toggleBit(this)">0</div>
-    <div class="bit" onclick="toggleBit(this)">0</div>
-    <div class="bit-eq">=</div>
-    <div id="byte-val" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--purple-d)">84</div>
-    <div style="font-size:12px;color:var(--text3);margin-left:4px">(decimal)</div>
+  <div class="byte-layout">
+    <div class="byte-current">
+      <div class="byte-current-label">Live byte decoder</div>
+      <div class="bit-row" id="bit-row">
+        <div class="bit" onclick="toggleBit(this)">0</div>
+        <div class="bit" onclick="toggleBit(this)">1</div>
+        <div class="bit" onclick="toggleBit(this)">0</div>
+        <div class="bit" onclick="toggleBit(this)">1</div>
+        <div class="bit" onclick="toggleBit(this)">0</div>
+        <div class="bit" onclick="toggleBit(this)">1</div>
+        <div class="bit" onclick="toggleBit(this)">0</div>
+        <div class="bit" onclick="toggleBit(this)">0</div>
+        <div class="bit-eq">=</div>
+        <div id="byte-val" class="byte-val">84</div>
+        <div style="font-size:12px;color:var(--text3);margin-left:4px">(decimal)</div>
+      </div>
+      <div class="byte-current-row">
+        <div class="byte-char-wrap">
+          <div class="byte-char-label">Char</div>
+          <div id="byte-char" class="byte-char">T</div>
+        </div>
+        <div class="byte-copy">
+          <div id="byte-result" class="byte-desc"></div>
+          <div class="byte-help">Printable ASCII uses values 32 to 126. The full 8-bit byte has 256 possible values, so values above 127 are not standard ASCII.</div>
+        </div>
+      </div>
+    </div>
+    <div class="byte-guide">
+      <div class="byte-guide-title">8-bit byte / ASCII reference</div>
+      <div class="byte-guide-grid">
+        <div class="byte-range">
+          <div class="byte-range-code">0-31</div>
+          <div class="byte-range-name">Control codes</div>
+          <div class="byte-range-ex">Non-printable commands like NUL, TAB, LF, and CR.</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">32-47</div>
+          <div class="byte-range-name">Space + symbols</div>
+          <div class="byte-range-ex">Space, punctuation, and a few special characters.</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">48-57</div>
+          <div class="byte-range-name">Digits</div>
+          <div class="byte-range-ex">0 1 2 3 4 5 6 7 8 9</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">58-64</div>
+          <div class="byte-range-name">Punctuation</div>
+          <div class="byte-range-ex">Symbols around the letters, like : ; &lt; = &gt; ? @</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">65-90</div>
+          <div class="byte-range-name">Uppercase A-Z</div>
+          <div class="byte-range-ex">Letters from A to Z.</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">91-96</div>
+          <div class="byte-range-name">Symbols</div>
+          <div class="byte-range-ex">[ \ ] ^ _ and `</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">97-122</div>
+          <div class="byte-range-name">Lowercase a-z</div>
+          <div class="byte-range-ex">Letters from a to z.</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">123-126</div>
+          <div class="byte-range-name">More symbols</div>
+          <div class="byte-range-ex">{ | } ~</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">127</div>
+          <div class="byte-range-name">DEL</div>
+          <div class="byte-range-ex">Delete control code.</div>
+        </div>
+        <div class="byte-range">
+          <div class="byte-range-code">128-255</div>
+          <div class="byte-range-name">Extended byte values</div>
+          <div class="byte-range-ex">Not standard ASCII; meaning depends on the character encoding.</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id="byte-result" class="byte-result"></div>
 </div>
 
 <!-- ── 08 SOFTWARE ── -->
@@ -907,7 +997,23 @@ function toggleSw(i){
 }
 
 // ── BIT TOGGLE ──
-const ASCII={84:'T',65:'A',72:'H',79:'O',83:'S',73:'I',78:'N',67:'C',80:'P',85:'U'};
+const ASCII_CONTROL={
+  0:'NUL',1:'SOH',2:'STX',3:'ETX',4:'EOT',5:'ENQ',6:'ACK',7:'BEL',8:'BS',9:'TAB',10:'LF',11:'VT',12:'FF',13:'CR',14:'SO',15:'SI',
+  16:'DLE',17:'DC1',18:'DC2',19:'DC3',20:'DC4',21:'NAK',22:'SYN',23:'ETB',24:'CAN',25:'EM',26:'SUB',27:'ESC',28:'FS',29:'GS',30:'RS',31:'US',
+  127:'DEL'
+};
+function describeByte(val){
+  if(val in ASCII_CONTROL) return 'Control code: '+ASCII_CONTROL[val];
+  if(val === 32) return 'Printable ASCII: space';
+  if(val >= 33 && val <= 126) return 'Printable ASCII character';
+  return 'Extended byte value: not standard ASCII';
+}
+function byteDisplayChar(val){
+  if(val === 32) return 'Space';
+  if(val >= 33 && val <= 126) return String.fromCharCode(val);
+  if(val in ASCII_CONTROL) return ASCII_CONTROL[val];
+  return '—';
+}
 function toggleBit(el){
   const isOne=el.classList.toggle('one');
   el.textContent=isOne?'1':'0';
@@ -917,9 +1023,10 @@ function updateByte(){
   const bits=[...document.querySelectorAll('#bit-row .bit')].map(b=>b.textContent==='1'?1:0);
   const val=bits.reduce((a,b,i)=>a+(b<<(7-i)),0);
   document.getElementById('byte-val').textContent=val;
+  document.getElementById('byte-char').textContent=byteDisplayChar(val);
   const res=document.getElementById('byte-result');
-  if(ASCII[val]){res.textContent='✨ That\'s the letter "'+ASCII[val]+'" in ASCII!';res.style.color='var(--purple-d)'}
-  else{res.textContent='Decimal value: '+val+' (keep clicking to find letters!)';res.style.color='var(--text3)'}
+  res.textContent=describeByte(val);
+  res.style.color=(val >= 33 && val <= 126) || val === 32 ? 'var(--purple-d)' : 'var(--text3)';
 }
 updateByte();
 
