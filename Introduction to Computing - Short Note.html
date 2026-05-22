@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT & Computer Hardware — Study Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:#8B7BFF; --purple-l:#211B46; --purple-d:#D8D2FF;
+  --teal:#31D0B1; --teal-l:#123A35; --teal-d:#C9FFF1;
+  --coral:#FF8A72; --coral-l:#3A201B; --coral-d:#FFD4CA;
+  --amber:#FFD36B; --amber-l:#3A2B10; --amber-d:#FFF2C5;
+  --blue:#66B6FF; --blue-l:#10263D; --blue-d:#D7ECFF;
+  --green:#7AD96A; --green-l:#152F14; --green-d:#D8FFD0;
+  --pink:#FF7BC0; --pink-l:#341627; --pink-d:#FFD7EA;
+  --bg:#0B1020; --card:#111A2E; --text:#F3F6FF; --text2:#B7C0D8; --text3:#8490B0;
+  --border:#25314D; --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:
+  radial-gradient(circle at top left,rgba(139,123,255,.18),transparent 28%),
+  radial-gradient(circle at top right,rgba(49,208,177,.12),transparent 22%),
+  radial-gradient(circle at bottom,rgba(102,182,255,.09),transparent 35%),
+  var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;font-size:19px}
+
+/* ── PAGE WRAP ── */
+.wrap{max-width:1020px;margin:0 auto;padding:2.5rem 1.5rem 5.5rem}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,#0F1830 0%,#142047 45%,#1C2B5B 100%);
+  border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:3rem 3rem 2.35rem;margin-bottom:2.25rem;
+  position:relative;overflow:hidden;color:#fff;cursor:default;
+}
+.header-orb{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,0.07);animation:orb-float 6s ease-in-out infinite;
+}
+.header-orb:nth-child(1){width:220px;height:220px;right:-50px;top:-60px;animation-delay:0s}
+.header-orb:nth-child(2){width:140px;height:140px;right:90px;bottom:-50px;animation-delay:2s}
+.header-orb:nth-child(3){width:80px;height:80px;left:30px;top:10px;animation-delay:4s;background:rgba(255,255,255,0.04)}
+@keyframes orb-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.05)}}
+.header-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.4rem}
+.header h1{font-size:38px;font-weight:800;margin-bottom:.35rem;position:relative}
+.header p{font-size:15px;color:rgba(255,255,255,.7);position:relative}
+.progress-bar{margin-top:1.25rem;position:relative}
+.progress-label{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:6px}
+.progress-track{height:4px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:rgba(255,255,255,.6);border-radius:4px;width:0;transition:width .8s ease}
+
+/* ── SECTION LABELS ── */
+.sec{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin:2.5rem 0 .85rem;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── BASE CARD ── */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.4rem 1.6rem;margin-bottom:.8rem;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(108,92,231,.1)}
+.card-title{font-size:18px;font-weight:600;margin-bottom:6px}
+.card-sub{font-size:15px;color:var(--text2);line-height:1.65}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:640px){.g2,.g3,.g5{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.g2,.g3,.g5{grid-template-columns:1fr}}
+
+/* ── CHIPS ── */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:20px;cursor:default;transition:transform .15s,box-shadow .15s}
+.chip:hover{transform:scale(1.08);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+
+/* ──────────────────────────────────────────
+   SECTION 01 — ANIMATED FLOW
+   ────────────────────────────────────────── */
+.flow-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.65rem;overflow:hidden}
+.flow-row{display:flex;align-items:center;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:1rem 0 .5rem;gap:4px}
+.flow-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:13px 18px;border-radius:14px;font-size:14px;font-weight:600;
+  cursor:pointer;transition:transform .2s,box-shadow .2s;flex-shrink:0;
+  position:relative;min-width:80px;text-align:center;
+}
+.flow-step:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 10px 28px rgba(0,0,0,.14)}
+.flow-step.active{transform:translateY(-4px) scale(1.07)}
+.flow-step .fs-icon{font-size:22px}
+.flow-step .fs-lbl{font-size:11px;font-weight:600}
+.flow-arrow-anim{font-size:18px;color:var(--text3);flex-shrink:0;animation:arrow-pulse 1.8s ease-in-out infinite}
+@keyframes arrow-pulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+.flow-detail{
+  background:var(--purple-l);border-radius:12px;padding:1rem 1.25rem;margin-top:.75rem;
+  font-size:13px;color:var(--purple-d);min-height:48px;transition:all .3s ease;
+  border-left:4px solid var(--purple);
+}
+.flow-detail strong{font-weight:700}
+
+/* ──────────────────────────────────────────
+   SECTION 02 — FLIP CARDS (computer types)
+   ────────────────────────────────────────── */
+.flip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:.75rem}
+@media(max-width:640px){.flip-grid{grid-template-columns:1fr 1fr}}
+.flip-card{height:154px;cursor:pointer;perspective:900px}
+.flip-inner{
+  width:100%;height:100%;position:relative;
+  transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{
+  position:absolute;width:100%;height:100%;backface-visibility:hidden;
+  border-radius:14px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:12px;
+  border:1px solid var(--border);
+}
+.flip-back{transform:rotateY(180deg)}
+.flip-icon{font-size:30px;margin-bottom:8px}
+.flip-front .flip-label{font-size:14px;font-weight:700}
+.flip-front .flip-hint{font-size:10px;color:var(--text3);margin-top:4px}
+.flip-back .flip-def{font-size:12px;line-height:1.5;font-weight:500}
+
+/* ──────────────────────────────────────────
+   SECTION 03 — BOUNCE ICON CARDS
+   ────────────────────────────────────────── */
+.bounce-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.35rem 1rem;text-align:center;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.bounce-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+.bounce-card:active{transform:scale(.95)}
+.bounce-icon{
+  font-size:34px;display:block;margin:0 auto 12px;
+  animation:icon-idle 3s ease-in-out infinite;
+}
+.bounce-card:hover .bounce-icon{animation:icon-bounce .4s ease}
+@keyframes icon-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes icon-bounce{0%{transform:translateY(0)}30%{transform:translateY(-10px)}60%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+.b-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.b-sub{font-size:12px;color:var(--text2)}
+.b-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:6px}
+
+/* ──────────────────────────────────────────
+   SECTION 04 — HARDWARE CLICK-EXPAND CARDS
+   ────────────────────────────────────────── */
+.hw-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.1rem;text-align:center;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;
+}
+.hw-card::before{
+  content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;
+  transform:scaleX(0);transition:transform .3s ease;transform-origin:left;
+}
+.hw-card:hover::before{transform:scaleX(1)}
+.hw-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.1)}
+.hw-icon{font-size:26px;margin-bottom:8px;display:block}
+.hw-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.hw-sub{font-size:11px;color:var(--text2)}
+.hw-expand{
+  max-height:0;overflow:hidden;transition:max-height .35s ease;
+  font-size:11px;color:var(--text3);margin-top:0;text-align:left;
+}
+.hw-card.open .hw-expand{max-height:80px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
+
+/* ──────────────────────────────────────────
+   SECTION 05 — CPU ANIMATED DIAGRAM
+   ────────────────────────────────────────── */
+.cpu-wrap{border:2px dashed var(--border);border-radius:14px;padding:1.4rem;position:relative}
+.cpu-title-tag{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--card);padding:0 12px;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text3)
+}
+.cpu-inner{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+.cpu-unit{
+  padding:13px 20px;border-radius:12px;font-size:14px;font-weight:600;
+  text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;
+}
+.cpu-unit:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.cpu-unit .cu-icon{font-size:22px;display:block;margin-bottom:4px}
+.cpu-unit .cu-name{font-size:13px;font-weight:700}
+.cpu-unit .cu-desc{font-size:11px;font-weight:400;opacity:.8;margin-top:2px}
+.cpu-signal{
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  margin-top:1rem;font-size:11px;color:var(--text3);
+}
+.sig-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--purple);
+  animation:sig-travel 1.5s linear infinite;
+}
+.sig-dot:nth-child(2){animation-delay:.5s;background:var(--teal)}
+.sig-dot:nth-child(3){animation-delay:1s;background:var(--coral)}
+@keyframes sig-travel{0%{opacity:0;transform:scale(.5)}20%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:scale(.5)}}
+
+/* ──────────────────────────────────────────
+   SECTION 06 — MEMORY TABS
+   ────────────────────────────────────────── */
+.tab-row{display:flex;gap:4px;margin-bottom:0;border-bottom:2px solid var(--border)}
+.tab-btn{
+  font-size:13.5px;font-weight:700;padding:10px 18px;border:none;background:none;
+  cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;margin-bottom:-2px;
+  transition:color .2s,border-color .2s;border-radius:8px 8px 0 0;
+}
+.tab-btn.active{color:var(--purple);border-color:var(--purple)}
+.tab-btn:hover:not(.active){color:var(--text2)}
+.tab-pane{display:none;padding:1rem 0 .5rem;animation:fade-in .3s ease}
+.tab-pane.active{display:block}
+@keyframes fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.mem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:500px){.mem-row{grid-template-columns:1fr}}
+.mem-tile{border-radius:12px;padding:1.05rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.mem-tile:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.mem-tile .mt-icon{font-size:24px;margin-bottom:6px}
+.mem-tile .mt-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.mem-tile .mt-desc{font-size:12.5px;opacity:.85}
+
+/* ──────────────────────────────────────────
+   SECTION 07 — BITS INTERACTIVE
+   ────────────────────────────────────────── */
+.bit-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:12px 0 6px}
+.bit{
+  font-family:'JetBrains Mono',monospace;width:36px;height:36px;
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;cursor:pointer;
+  background:var(--purple-l);color:var(--purple-d);
+  transition:transform .15s,background .15s;user-select:none;
+  border:2px solid transparent;
+}
+.bit:hover{transform:scale(1.12)}
+.bit.one{background:var(--purple-d);color:#fff;border-color:var(--purple)}
+.bit-eq{font-size:13px;color:var(--text2);margin:0 6px}
+.byte-result{font-size:13px;font-weight:700;color:var(--purple-d);margin-top:6px;min-height:20px;transition:all .2s}
+.scale-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}
+.sz-pill{
+  font-size:12px;font-weight:700;padding:6px 13px;border-radius:20px;
+  background:rgba(139,123,255,.12);color:var(--purple-d);cursor:pointer;
+  transition:transform .15s,background .15s,color .15s;
+}
+.sz-pill:hover{background:var(--purple-d);color:#fff;transform:scale(1.08)}
+.sz-arrow{color:var(--text3);font-size:14px}
+
+/* ──────────────────────────────────────────
+   SECTION 08 — SOFTWARE ACCORDION
+   ────────────────────────────────────────── */
+.sw-item{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:.6rem;overflow:hidden;transition:box-shadow .2s;
+}
+.sw-item:hover{box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.sw-header{
+  display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;
+  cursor:pointer;user-select:none;
+}
+.sw-icon{font-size:22px}
+.sw-htitle{font-size:14px;font-weight:700;flex:1}
+.sw-arrow{font-size:16px;color:var(--text3);transition:transform .3s}
+.sw-item.open .sw-arrow{transform:rotate(180deg)}
+.sw-body{
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+  padding:0 1.25rem;
+}
+.sw-item.open .sw-body{max-height:300px;padding-bottom:1rem}
+.sw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+.sw-chip{font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px;transition:transform .15s}
+.sw-chip:hover{transform:scale(1.06)}
+
+/* ──────────────────────────────────────────
+   SECTION 09 — ERGO HOVER CARDS
+   ────────────────────────────────────────── */
+.ergo-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.2rem;display:flex;gap:12px;align-items:flex-start;
+  cursor:default;transition:transform .2s,box-shadow .2s;overflow:hidden;position:relative;
+}
+.ergo-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.1)}
+.ergo-icon-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:transform .3s}
+.ergo-card:hover .ergo-icon-wrap{transform:rotate(-8deg) scale(1.15)}
+.ergo-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.ergo-desc{font-size:12px;color:var(--text2)}
+.ergo-tip{
+  font-size:11px;font-weight:600;margin-top:5px;padding:4px 8px;
+  border-radius:8px;display:inline-block;
+}
+
+/* ──────────────────────────────────────────
+   QUICK REFERENCE — ANIMATED GLOSSARY
+   ────────────────────────────────────────── */
+.glossary{
+  background:linear-gradient(135deg,#0F1830,#1C2B5B);
+  border-radius:var(--radius);padding:1.65rem;color:#fff;
+}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1rem;margin-top:1rem}
+.gls-item{
+  background:rgba(255,255,255,.08);border-radius:12px;padding:.85rem 1rem;
+  cursor:pointer;transition:background .2s,transform .2s;border:1px solid rgba(255,255,255,.1);
+}
+.gls-item:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.gls-abbr{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
+.gls-full{font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4;transition:color .2s}
+.gls-item:hover .gls-full{color:rgba(255,255,255,.9)}
+.glossary-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:12.5px;color:var(--text3);margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+
+/* ── AUTHOR POPUP ── */
+.author-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px}
+.author-link,.footer-link{
+  color:#EAF1FF;text-decoration:none;font-weight:700;font-size:12.5px;
+  padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);transition:transform .15s,background .15s,border-color .15s;
+}
+.author-link:hover,.footer-link:hover{transform:translateY(-1px);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(4,8,18,.72);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;z-index:1200;padding:1.25rem;
+}
+.modal-backdrop.open{display:flex}
+.modal{
+  width:min(520px,100%);background:#10182B;border:1px solid rgba(255,255,255,.1);border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);padding:1.35rem 1.35rem 1.15rem;color:var(--text);
+}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:1rem}
+.modal-title{font-size:18px;font-weight:800}
+.modal-close{
+  appearance:none;border:none;background:rgba(255,255,255,.06);color:var(--text);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;
+}
+.modal-close:hover{background:rgba(255,255,255,.12)}
+.modal-list{display:grid;gap:10px}
+.modal-item{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;
+  color:var(--text);padding:12px 13px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+}
+.modal-item:hover{background:rgba(255,255,255,.08)}
+.modal-item span{color:var(--text3);font-size:12px}
+
+/* ── CONFETTI PARTICLE (fun touch) ── */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;overflow:hidden}
+.conf-piece{position:absolute;width:8px;height:8px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="confetti-wrap" id="confetti"></div>
+<div class="modal-backdrop" id="siteModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="modalTitle">Websites</div>
+        <div style="color:var(--text2);font-size:13px;margin-top:4px">Choose a site to open</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close popup" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-list">
+      <a class="modal-item" href="https://sevinda-herath.is-a.dev" target="_blank" rel="noopener noreferrer">Sevinda Herath <span>sevinda-herath.is-a.dev</span></a>
+      <a class="modal-item" href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude <span>claude.ai</span></a>
+      <a class="modal-item" href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot <span>github.com/features/copilot</span></a>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+
+<!-- ── HEADER ── -->
+<div class="header reveal">
+  <div class="header-orb"></div>
+  <div class="header-orb"></div>
+  <div class="header-orb"></div>
+  <div class="header-label" style="position:relative">📚 Study Notes · ICT</div>
+  <h1>Computer Hardware & ICT</h1>
+  <p>Click every tile — hover, flip, and explore to learn!</p>
+  <div class="progress-bar">
+    <div class="progress-label">Your reading progress</div>
+    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+  </div>
+</div>
+
+<!-- ── 01 WHAT IS A COMPUTER ── -->
+<div class="sec reveal">01 — What is a computer?</div>
+<div class="flow-card reveal">
+  <div class="card-title">Click each step to learn what happens inside a computer</div>
+  <div class="card-sub" style="margin-top:2px">Every computer follows this same 5-step cycle</div>
+  <div class="flow-row" id="flow-row">
+    <div class="flow-step" style="background:#181728;color:#C7C1E8" onclick="showFlow(0)" id="fs0">
+      <span class="fs-icon">📥</span><span class="fs-lbl">Input</span>
+    </div>
+    <div class="flow-arrow-anim" style="animation-delay:.2s">→</div>
+    <div class="flow-step" style="background:#122522;color:#B8E9DD" onclick="showFlow(1)" id="fs1">
+      <span class="fs-icon">⚙️</span><span class="fs-lbl">Process</span>
+    </div>
+    <div class="flow-arrow-anim" style="animation-delay:.4s">→</div>
+    <div class="flow-step" style="background:#231915;color:#E8C9C1" onclick="showFlow(2)" id="fs2">
+      <span class="fs-icon">📤</span><span class="fs-lbl">Output</span>
+    </div>
+    <div class="flow-arrow-anim" style="animation-delay:.6s">→</div>
+    <div class="flow-step" style="background:#262214;color:#E4D8A9" onclick="showFlow(3)" id="fs3">
+      <span class="fs-icon">💾</span><span class="fs-lbl">Storage</span>
+    </div>
+    <div class="flow-arrow-anim" style="animation-delay:.8s">→</div>
+    <div class="flow-step" style="background:#132233;color:#C7DBEA" onclick="showFlow(4)" id="fs4">
+      <span class="fs-icon">📡</span><span class="fs-lbl">Share</span>
+    </div>
+  </div>
+  <div class="flow-detail" id="flow-detail">
+    👆 Click any step above to learn what it means
+  </div>
+</div>
+
+<!-- ── 02 TYPES OF COMPUTERS ── -->
+<div class="sec reveal">02 — Types of computers</div>
+<div class="card-sub reveal" style="margin-bottom:.75rem;font-size:13px;color:var(--text2)">🃏 Hover (or click) each card to flip it and see the definition</div>
+<div class="flip-grid reveal" id="flip-grid">
+  <!-- By Size -->
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#181728">
+        <div class="flip-icon">🚀</div>
+        <div class="flip-label" style="color:#A9A0D6">Supercomputer</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#1B1A33;color:#E8EAF7;border-color:#4A4A70">
+        <div class="flip-def">Most powerful. Used for space, weather, science. Very expensive &amp; rare.</div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#122522">
+        <div class="flip-icon">🏢</div>
+        <div class="flip-label" style="color:#93CABB">Mainframe</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#122D29;color:#E7F5F1;border-color:#2E5D55">
+        <div class="flip-def">Many users share one machine. Used in banks &amp; large businesses.</div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#231915">
+        <div class="flip-icon">🖥️</div>
+        <div class="flip-label" style="color:#C09A8B">Mini Computer</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#2A1B16;color:#F3E7E2;border-color:#5B4036">
+        <div class="flip-def">Less powerful than mainframes. A few users connect via terminals. Used in banking.</div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#262214">
+        <div class="flip-icon">💻</div>
+        <div class="flip-label" style="color:#C3B07B">Personal (PC)</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#2A2515;color:#F4EBD1;border-color:#5A5136">
+        <div class="flip-def">Small, cheap, personal use. Laptops &amp; desktops are PCs.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Technology types -->
+<div class="flip-grid reveal" style="grid-template-columns:repeat(3,1fr)">
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#132233">
+        <div class="flip-icon">〰️</div>
+        <div class="flip-label" style="color:#90B5D6">Analog</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#132A3D;color:#E3F0FA;border-color:#33506C">
+        <div class="flip-def">Works with continuous data (temperature, voltage). Example: thermometer.</div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#152415">
+        <div class="flip-icon">🔢</div>
+        <div class="flip-label" style="color:#A0BE88">Digital</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#172517;color:#E9F4E1;border-color:#395338">
+        <div class="flip-def">Works with binary data (0s &amp; 1s). Most computers today are digital.</div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front" style="background:#251520">
+        <div class="flip-icon">🔀</div>
+        <div class="flip-label" style="color:#C08AA8">Hybrid</div>
+        <div class="flip-hint">click to flip</div>
+      </div>
+      <div class="flip-back" style="background:#2A1822;color:#F5E9F0;border-color:#594053">
+        <div class="flip-def">Combines analog + digital. Has both analog processing power and digital memory.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 03 THREE COMPONENTS ── -->
+<div class="sec reveal">03 — The 3 building blocks</div>
+<div class="g3 reveal">
+  <div class="bounce-card" onclick="popConfetti(event)" style="border-top:4px solid var(--purple)">
+    <span class="bounce-icon">🖥️</span>
+    <div class="b-title">Hardware</div>
+    <div class="b-sub">Physical parts you can touch</div>
+    <div class="b-badge" style="background:var(--purple-l);color:var(--purple-d)">Click me!</div>
+  </div>
+  <div class="bounce-card" onclick="popConfetti(event)" style="border-top:4px solid var(--teal)">
+    <span class="bounce-icon">💻</span>
+    <div class="b-title">Software</div>
+    <div class="b-sub">Instructions for the hardware</div>
+    <div class="b-badge" style="background:var(--teal-l);color:var(--teal-d)">Click me!</div>
+  </div>
+  <div class="bounce-card" onclick="popConfetti(event)" style="border-top:4px solid var(--coral)">
+    <span class="bounce-icon">👤</span>
+    <div class="b-title">Liveware</div>
+    <div class="b-sub">The human using the computer</div>
+    <div class="b-badge" style="background:var(--coral-l);color:var(--coral-d)">Click me!</div>
+  </div>
+</div>
+
+<!-- ── 04 HARDWARE CATEGORIES ── -->
+<div class="sec reveal">04 — Hardware categories</div>
+<div class="card-sub reveal" style="margin-bottom:.75rem;font-size:13px;color:var(--text2)">👆 Click any tile to see examples</div>
+<div class="g5 reveal">
+  <div class="hw-card" style="border-top:3px solid var(--purple)" onclick="this.classList.toggle('open')">
+    <div class="hw-card" style="border:none;padding:0">
+      <style>.hw-card:nth-child(1)::before{background:var(--purple)}</style>
+    </div>
+    <span class="hw-icon">⌨️</span>
+    <div class="hw-title">Input</div>
+    <div class="hw-sub">Data goes IN</div>
+    <div class="hw-expand">📌 Examples: Keyboard · Mouse · Scanner · Microphone · Webcam · Digital Camera · Touch Screen</div>
+  </div>
+  <div class="hw-card" style="border-top:3px solid var(--teal)" onclick="this.classList.toggle('open')">
+    <span class="hw-icon">🖥️</span>
+    <div class="hw-title">Output</div>
+    <div class="hw-sub">Info comes OUT</div>
+    <div class="hw-expand">📌 Examples: Monitor · Printer · Speaker · Projector · Headphones</div>
+  </div>
+  <div class="hw-card" style="border-top:3px solid var(--coral)" onclick="this.classList.toggle('open')">
+    <span class="hw-icon">⚙️</span>
+    <div class="hw-title">Processing</div>
+    <div class="hw-sub">The CPU works</div>
+    <div class="hw-expand">📌 CPU contains: Control Unit (CU) + Arithmetic Logic Unit (ALU) + Registers</div>
+  </div>
+  <div class="hw-card" style="border-top:3px solid var(--amber)" onclick="this.classList.toggle('open')">
+    <span class="hw-icon">💾</span>
+    <div class="hw-title">Storage</div>
+    <div class="hw-sub">Data is saved</div>
+    <div class="hw-expand">📌 Primary: RAM, ROM, Cache · Secondary: HDD, SSD, USB, CD/DVD, Memory Card</div>
+  </div>
+  <div class="hw-card" style="border-top:3px solid var(--blue)" onclick="this.classList.toggle('open')">
+    <span class="hw-icon">📡</span>
+    <div class="hw-title">Comms</div>
+    <div class="hw-sub">Connect devices</div>
+    <div class="hw-expand">📌 Examples: Modem · Network Switch · Router · Network Card (NIC)</div>
+  </div>
+</div>
+
+<!-- ── 05 CPU ── -->
+<div class="sec reveal">05 — Inside the CPU</div>
+<div class="card reveal">
+  <div class="card-sub" style="margin-bottom:14px">The CPU is the <strong>brain</strong> of the computer. Click each unit to learn its job.</div>
+  <div class="cpu-wrap">
+    <div class="cpu-title-tag">CPU — Central Processing Unit</div>
+    <div class="cpu-inner">
+      <div class="cpu-unit" style="background:var(--purple-l);color:var(--purple-d)" onclick="cpuClick(this,'The Control Unit directs and coordinates ALL activities in the computer — like a conductor leading an orchestra. 🎼')">
+        <span class="cu-icon">🎛️</span>
+        <div class="cu-name">Control Unit</div>
+        <div class="cu-desc">Click to learn</div>
+      </div>
+      <div class="cpu-unit" style="background:var(--teal-l);color:var(--teal-d)" onclick="cpuClick(this,'The ALU performs all arithmetic (+ − × ÷) and logical comparisons. Every calculation your computer does goes through here! 🔢')">
+        <span class="cu-icon">🔢</span>
+        <div class="cu-name">ALU</div>
+        <div class="cu-desc">Click to learn</div>
+      </div>
+      <div class="cpu-unit" style="background:var(--amber-l);color:var(--amber-d)" onclick="cpuClick(this,'Registers are tiny, ultra-fast storage inside the CPU. They hold data the ALU is actively working with right now — like a scratch pad. ⚡')">
+        <span class="cu-icon">⚡</span>
+        <div class="cu-name">Registers</div>
+        <div class="cu-desc">Click to learn</div>
+      </div>
+    </div>
+    <div class="cpu-signal">
+      <span style="margin-right:6px">Signals flowing:</span>
+      <div class="sig-dot"></div>
+      <div class="sig-dot"></div>
+      <div class="sig-dot"></div>
+    </div>
+  </div>
+  <div id="cpu-info" style="margin-top:10px;font-size:13px;color:var(--text2);min-height:20px;transition:all .3s;padding:0 4px"></div>
+</div>
+
+<!-- ── 06 MEMORY ── -->
+<div class="sec reveal">06 — Memory & Storage</div>
+<div class="card reveal">
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab(0)">Primary Memory</button>
+    <button class="tab-btn" onclick="switchTab(1)">Secondary Storage</button>
+    <button class="tab-btn" onclick="switchTab(2)">Storage Scale</button>
+  </div>
+  <div class="tab-pane active" id="tab0">
+    <div class="card-sub" style="margin-bottom:12px">Primary memory is <strong>inside</strong> the computer. It works directly with the CPU.</div>
+    <div class="mem-row">
+      <div class="mem-tile" style="background:#1B1A33" onclick="popConfetti(event)">
+        <div class="mt-icon">🧠</div>
+        <div class="mt-name" style="color:#C7C1E8">RAM</div>
+        <div class="mt-desc" style="color:#C7C1E8">Working memory. <strong>VOLATILE</strong> — wiped when power off.</div>
+      </div>
+      <div class="mem-tile" style="background:#122D29" onclick="popConfetti(event)">
+        <div class="mt-icon">📖</div>
+        <div class="mt-name" style="color:#B8E9DD">ROM</div>
+        <div class="mt-desc" style="color:#B8E9DD">Startup instructions. <strong>PERMANENT</strong> — never erased.</div>
+      </div>
+      <div class="mem-tile" style="background:#2A2515" onclick="popConfetti(event)">
+        <div class="mt-icon">⚡</div>
+        <div class="mt-name" style="color:#E4D8A9">Cache</div>
+        <div class="mt-desc" style="color:#E4D8A9">Fastest memory. Sits between CPU &amp; RAM.</div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="tab1">
+    <div class="card-sub" style="margin-bottom:12px">Secondary storage keeps data <strong>permanently</strong> even when the computer is off.</div>
+    <div class="mem-row" style="grid-template-columns:repeat(3,1fr)">
+      <div class="mem-tile" style="background:#262214" onclick="popConfetti(event)">
+        <div class="mt-icon">🧲</div>
+        <div class="mt-name" style="color:#C3B07B">Magnetic</div>
+        <div class="mt-desc" style="color:#C3B07B">HDD · Floppy · Magnetic Tape</div>
+      </div>
+      <div class="mem-tile" style="background:#132233" onclick="popConfetti(event)">
+        <div class="mt-icon">💿</div>
+        <div class="mt-name" style="color:#C7DBEA">Optical</div>
+        <div class="mt-desc" style="color:#C7DBEA">CD · DVD · Blu-ray</div>
+      </div>
+      <div class="mem-tile" style="background:#152415" onclick="popConfetti(event)">
+        <div class="mt-icon">🔌</div>
+        <div class="mt-name" style="color:#C0D9B9">Solid State</div>
+        <div class="mt-desc" style="color:#C0D9B9">USB Flash · SSD · Memory Card</div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane" id="tab2">
+    <div class="card-sub" style="margin-bottom:12px">Hover each unit to see what it can store!</div>
+    <div class="scale-row">
+      <span class="sz-pill" title="A single letter or number">1 Bit = 0 or 1</span>
+      <span class="sz-arrow">→</span>
+      <span class="sz-pill" title="One character like 'A'">8 bits = 1 Byte</span>
+      <span class="sz-arrow">→</span>
+      <span class="sz-pill" title="A short paragraph">1 KB = 1024 B</span>
+      <span class="sz-arrow">→</span>
+      <span class="sz-pill" title="A few photos">1 MB = 1024 KB</span>
+      <span class="sz-arrow">→</span>
+      <span class="sz-pill" title="A full movie">1 GB = 1024 MB</span>
+      <span class="sz-arrow">→</span>
+      <span class="sz-pill" title="Hundreds of movies">1 TB = 1024 GB</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 07 BITS & BYTES ── -->
+<div class="sec reveal">07 — Bits &amp; Bytes — try it!</div>
+<div class="card reveal">
+  <div class="card-title">Build your own byte — click the bits to toggle 0 and 1</div>
+  <div class="card-sub" style="margin-top:4px">Each square is one bit. 8 bits = 1 byte = 1 character</div>
+  <div class="bit-row" id="bit-row">
+    <div class="bit" onclick="toggleBit(this)">0</div>
+    <div class="bit" onclick="toggleBit(this)">1</div>
+    <div class="bit" onclick="toggleBit(this)">0</div>
+    <div class="bit" onclick="toggleBit(this)">1</div>
+    <div class="bit" onclick="toggleBit(this)">0</div>
+    <div class="bit" onclick="toggleBit(this)">1</div>
+    <div class="bit" onclick="toggleBit(this)">0</div>
+    <div class="bit" onclick="toggleBit(this)">0</div>
+    <div class="bit-eq">=</div>
+    <div id="byte-val" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--purple-d)">84</div>
+    <div style="font-size:12px;color:var(--text3);margin-left:4px">(decimal)</div>
+  </div>
+  <div id="byte-result" class="byte-result"></div>
+</div>
+
+<!-- ── 08 SOFTWARE ── -->
+<div class="sec reveal">08 — Software</div>
+<div class="card-sub reveal" style="margin-bottom:.75rem;font-size:13px;color:var(--text2)">Click each section to expand it</div>
+<div class="reveal">
+  <div class="sw-item" id="sw0">
+    <div class="sw-header" onclick="toggleSw(0)">
+      <span class="sw-icon">🖥️</span>
+      <div>
+        <div class="sw-htitle">System Software</div>
+        <div style="font-size:12px;color:var(--text3)">Manages the computer itself</div>
+      </div>
+      <span class="sw-arrow">▼</span>
+    </div>
+    <div class="sw-body">
+      <div class="card-sub">Runs in the background. Without it, hardware does nothing. Includes the Operating System (OS) and utility programs.</div>
+      <div class="sw-chips">
+        <span class="sw-chip" style="background:var(--purple-l);color:var(--purple-d)">⊞ Windows</span>
+        <span class="sw-chip" style="background:var(--purple-l);color:var(--purple-d)">🍎 macOS</span>
+        <span class="sw-chip" style="background:var(--purple-l);color:var(--purple-d)">🐧 Linux</span>
+        <span class="sw-chip" style="background:var(--purple-l);color:var(--purple-d)">🛡️ Antivirus</span>
+        <span class="sw-chip" style="background:var(--purple-l);color:var(--purple-d)">🔧 Disk Tools</span>
+      </div>
+    </div>
+  </div>
+  <div class="sw-item" id="sw1">
+    <div class="sw-header" onclick="toggleSw(1)">
+      <span class="sw-icon">📦</span>
+      <div>
+        <div class="sw-htitle">Application Software</div>
+        <div style="font-size:12px;color:var(--text3)">Programs users actually run</div>
+      </div>
+      <span class="sw-arrow">▼</span>
+    </div>
+    <div class="sw-body">
+      <div class="card-sub">Helps users do real tasks — write, calculate, browse, design, play.</div>
+      <div class="sw-chips">
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">📝 MS Word</span>
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">📊 Excel</span>
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">🌐 Chrome</span>
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">🎮 Games</span>
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">🎨 Photoshop</span>
+        <span class="sw-chip" style="background:var(--teal-l);color:var(--teal-d)">📧 Email</span>
+      </div>
+    </div>
+  </div>
+  <div class="sw-item" id="sw2">
+    <div class="sw-header" onclick="toggleSw(2)">
+      <span class="sw-icon">🖱️</span>
+      <div>
+        <div class="sw-htitle">OS Interfaces: CLI vs GUI</div>
+        <div style="font-size:12px;color:var(--text3)">Two ways to talk to a computer</div>
+      </div>
+      <span class="sw-arrow">▼</span>
+    </div>
+    <div class="sw-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+        <div style="background:#171432;border-radius:10px;padding:.75rem;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-weight:700;font-size:13px;color:#C7C1E8;margin-bottom:4px">⌨️ CLI — Command Line</div>
+          <div style="font-size:12px;color:var(--text2)">You type text commands. Fast but requires memorising commands.</div>
+        </div>
+        <div style="background:#122D29;border-radius:10px;padding:.75rem;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-weight:700;font-size:13px;color:#B8E9DD;margin-bottom:4px">🖱️ GUI — Graphical</div>
+          <div style="font-size:12px;color:var(--text2)">Click icons &amp; menus. Easier to use. Used by most people today.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 09 ERGONOMICS ── -->
+<div class="sec reveal">09 — Computer Ergonomics</div>
+<div class="g2 reveal">
+  <div class="ergo-card">
+    <div class="ergo-icon-wrap" style="background:#132233;color:#C7DBEA">👁️</div>
+    <div>
+      <div class="ergo-title">Monitor</div>
+      <div class="ergo-desc">Eye level, about arm's length away. Top of screen below eye level.</div>
+      <div class="ergo-tip" style="background:#132233;color:#C7DBEA">💡 Prevents neck strain</div>
+    </div>
+  </div>
+  <div class="ergo-card">
+    <div class="ergo-icon-wrap" style="background:#122D29;color:#B8E9DD">🪑</div>
+    <div>
+      <div class="ergo-title">Chair & Posture</div>
+      <div class="ergo-desc">Back supported, knees at 90°+, feet flat on the floor.</div>
+      <div class="ergo-tip" style="background:#122D29;color:#B8E9DD">💡 Prevents back pain</div>
+    </div>
+  </div>
+  <div class="ergo-card">
+    <div class="ergo-icon-wrap" style="background:#1B1A33;color:#C7C1E8">⌨️</div>
+    <div>
+      <div class="ergo-title">Keyboard</div>
+      <div class="ergo-desc">Forearms horizontal, wrists straight when typing.</div>
+      <div class="ergo-tip" style="background:#1B1A33;color:#C7C1E8">💡 Prevents wrist injury</div>
+    </div>
+  </div>
+  <div class="ergo-card">
+    <div class="ergo-icon-wrap" style="background:#2A2515;color:#E4D8A9">💡</div>
+    <div>
+      <div class="ergo-title">Lighting</div>
+      <div class="ergo-desc">Light source to the side — never directly behind the screen.</div>
+      <div class="ergo-tip" style="background:#2A2515;color:#E4D8A9">💡 Prevents eye strain</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── QUICK REFERENCE ── -->
+<div class="sec reveal">Quick Reference — Abbreviations</div>
+<div class="glossary reveal">
+  <div class="glossary-title">Click any card to highlight it</div>
+  <div class="glossary-grid">
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">CPU</div>
+      <div class="gls-full">Central Processing Unit</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">ALU</div>
+      <div class="gls-full">Arithmetic &amp; Logic Unit</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">RAM</div>
+      <div class="gls-full">Random Access Memory</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">ROM</div>
+      <div class="gls-full">Read Only Memory</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">OS</div>
+      <div class="gls-full">Operating System</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">GUI</div>
+      <div class="gls-full">Graphical User Interface</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">ICT</div>
+      <div class="gls-full">Information &amp; Communication Technology</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">HDD</div>
+      <div class="gls-full">Hard Disk Drive</div>
+    </div>
+    <div class="gls-item" onclick="this.style.background='rgba(255,255,255,.28)'">
+      <div class="gls-abbr">USB</div>
+      <div class="gls-full">Universal Serial Bus</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  ICT &amp; Computer Hardware — Interactive Study Notes · CAIT
+  <div class="author-links">
+    <a class="author-link" href="https://sevinda-herath.is-a.dev" target="_blank" rel="noopener noreferrer"> by Sevinda Herath</a>
+    <a class="footer-link" href="javascript:void(0)" onclick="openModal()">with Claude + GitHub Copilot</a>
+  </div>
+</div>
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}})
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// ── PROGRESS BAR ──
+window.addEventListener('scroll',()=>{
+  const pct = (window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('prog').style.width=Math.min(pct,100)+'%';
+});
+
+// ── FLOW STEPS ──
+const flowData=[
+  {color:'#191534',tc:'#D8D2FF',text:'<strong>Input</strong> — Data enters the computer through input devices like a keyboard or mouse. Example: typing "25 + 37" on a calculator app.'},
+  {color:'#112D2A',tc:'#C9FFF1',text:'<strong>Process</strong> — The CPU (brain) performs operations on the data following software instructions. It does calculations, comparisons, and logic.'},
+  {color:'#2B1D16',tc:'#FFD4CA',text:'<strong>Output</strong> — The result is shown to the user via output devices. Example: the answer "62" appears on the monitor.'},
+  {color:'#2C2611',tc:'#FFF2C5',text:'<strong>Storage</strong> — Results can be saved for later in RAM (temporary) or on a hard drive / USB (permanent).'},
+  {color:'#102438',tc:'#D7ECFF',text:'<strong>Communication</strong> — Processed information can be shared with others via the internet, email, or a network using devices like a modem or router.'},
+];
+function showFlow(i){
+  document.querySelectorAll('.flow-step').forEach((s,j)=>s.classList.toggle('active',j===i));
+  const d=document.getElementById('flow-detail');
+  d.style.background=flowData[i].color;
+  d.style.color=flowData[i].tc;
+  d.style.borderColor=flowData[i].tc;
+  d.innerHTML=flowData[i].text;
+}
+
+// ── CPU INFO ──
+function cpuClick(el,msg){
+  document.querySelectorAll('.cpu-unit').forEach(u=>{u.style.opacity='.5';u.style.transform=''});
+  el.style.opacity='1';el.style.transform='scale(1.06)';
+  const d=document.getElementById('cpu-info');
+  d.style.background=el.style.background;
+  d.style.color=el.style.color;
+  d.style.padding='10px 14px';
+  d.style.borderRadius='10px';
+  d.innerHTML=msg;
+}
+
+// ── TABS ──
+const tabs=document.querySelectorAll('.tab-btn');
+const panes=document.querySelectorAll('.tab-pane');
+function switchTab(i){
+  tabs.forEach((t,j)=>t.classList.toggle('active',j===i));
+  panes.forEach((p,j)=>p.classList.toggle('active',j===i));
+}
+
+// ── SOFTWARE ACCORDION ──
+function toggleSw(i){
+  const el=document.getElementById('sw'+i);
+  el.classList.toggle('open');
+}
+
+// ── BIT TOGGLE ──
+const ASCII={84:'T',65:'A',72:'H',79:'O',83:'S',73:'I',78:'N',67:'C',80:'P',85:'U'};
+function toggleBit(el){
+  const isOne=el.classList.toggle('one');
+  el.textContent=isOne?'1':'0';
+  updateByte();
+}
+function updateByte(){
+  const bits=[...document.querySelectorAll('#bit-row .bit')].map(b=>b.textContent==='1'?1:0);
+  const val=bits.reduce((a,b,i)=>a+(b<<(7-i)),0);
+  document.getElementById('byte-val').textContent=val;
+  const res=document.getElementById('byte-result');
+  if(ASCII[val]){res.textContent='✨ That\'s the letter "'+ASCII[val]+'" in ASCII!';res.style.color='var(--purple-d)'}
+  else{res.textContent='Decimal value: '+val+' (keep clicking to find letters!)';res.style.color='var(--text3)'}
+}
+updateByte();
+
+// ── CONFETTI ──
+const colors=['#6C5CE7','#00B894','#E17055','#FDCB6E','#0984E3','#E84393','#55A630'];
+function popConfetti(e){
+  const x=e.clientX,y=e.clientY;
+  const wrap=document.getElementById('confetti');
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='conf-piece';
+    p.style.cssText=`left:${x+(-30+Math.random()*60)}px;top:${y}px;background:${colors[i%colors.length]};animation-duration:${.8+Math.random()*.8}s;animation-delay:${Math.random()*.2}s;transform:rotate(${Math.random()*360}deg)`;
+    wrap.appendChild(p);
+    setTimeout(()=>p.remove(),1800);
+  }
+}
+
+// ── WEBSITE POPUP ──
+const siteModal=document.getElementById('siteModal');
+function openModal(){
+  siteModal.classList.add('open');
+  siteModal.setAttribute('aria-hidden','false');
+}
+function closeModal(){
+  siteModal.classList.remove('open');
+  siteModal.setAttribute('aria-hidden','true');
+}
+siteModal.addEventListener('click',e=>{if(e.target===siteModal) closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+</script>
+</body>
+</html>
